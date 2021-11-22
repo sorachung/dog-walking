@@ -12,5 +12,6 @@ export const Walkers = () => {
 
     walkerHTML += "</ul>"
 
+    return walkerHTML
 }
 
