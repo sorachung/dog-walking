@@ -1,19 +1,23 @@
 import { getWalkers } from "./database.js";
+import { getCities } from "./database.js";
+
+const walkers = getWalkers();
+const cities = getCities();
 
 document.addEventListener("click", (clickEvent) => {
   const itemClicked = clickEvent.target;
   if (itemClicked.id.startsWith("walker")) {
     const [, walkerId] = itemClicked.id.split("--");
 
-    for (const walker of walkers) {
-      if (walker.id === parseInt(walkerId)) {
-        window.alert(`${walker.name} services ${walker.city}`);
+    const clickedWalker = walkers.find((walker) => walker.id === parseInt(walkerId));
+
+    for (const city of cities) {
+      if (clickedWalker.cityId === city.id) {
+        window.alert(`${clickedWalker.name} services ${city.name}`);
       }
     }
   }
 });
-
-const walkers = getWalkers();
 
 export const Walkers = () => {
   let walkerHTML = "<ul>";
